@@ -1,12 +1,11 @@
 import createError from 'http-errors';
 import express from 'express';
 
-import indexRouter from './routes/index.js';
-
+import groupsRouter from './api/groups.js';
 
 var app = express();
 
-app.use('/', indexRouter);
+app.use('/groups', groupsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -4,7 +4,7 @@ const router = express.Router();
 import { pool } from '../db.js';
 
 
-router.get('/groups', function(req, res, next) {
+router.get('/', function(req, res, next) {
   console.log('ovdje sam');
   pool.query('SELECT * FROM "groups"', (error, results) => {
     if (error) {
