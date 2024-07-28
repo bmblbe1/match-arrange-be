@@ -1,9 +1,17 @@
-var express = require('express');
-var router = express.Router();
+import express from 'express';
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+const router = express.Router();
+import { pool } from '../db.js';
+
+
+router.get('/groups', function(req, res, next) {
+  pool.query('SELECT * FROM "groups"', (error, results) => {
+    if (error) {
+      return res.status(500).json({ error: error.message });
+    } else {
+      res.json({ groups: results.rows });
+    }
+  });
 });
 
-module.exports = router;
+export default router;
