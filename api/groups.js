@@ -1,14 +1,12 @@
 import express from 'express';
+import { pool } from '../db/index.js';
 
-const router = express.Router();
-import { pool } from '../db.js';
+const app = express();
 
-
-router.get('/', function(req, res, next) {
-  console.log('ovdje sam');
+app.get('/groups', (req, res) => {
+  console.log('Fetching groups...');
   pool.query('SELECT * FROM "groups"', (error, results) => {
     if (error) {
-      console.log(error, 'ovdje')
       return res.status(500).json({ error: error.message });
     } else {
       res.json({ groups: results.rows });
@@ -16,4 +14,4 @@ router.get('/', function(req, res, next) {
   });
 });
 
-export default router;
+export default app;
